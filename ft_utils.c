@@ -6,18 +6,18 @@
 /*   By: adapassa <adapassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:22 by adapassa          #+#    #+#             */
-/*   Updated: 2024/01/16 10:31:37 by adapassa         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:45:28 by adapassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_printhex(unsigned long nbr, int maiusc)
+int	ft_printhex(unsigned long nbr, int maiusc)
 {
-	char *container;
-	char *maiuscarr;
-	int	len;
-	int tmp;
+	char	*container;
+	char	*maiuscarr;
+	int		len;
+	int		tmp;
 
 	container = "0123456789abcdef";
 	maiuscarr = "0123456789ABCDEF";
@@ -39,13 +39,11 @@ int ft_printhex(unsigned long nbr, int maiusc)
 
 int	ft_putnbr(int n)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (n == -2147483648)
-	{
 		len += write(1, "-2147483648", 11);
-	}
 	else if (n < 0)
 	{
 		len += write(1, "-", 1);
@@ -64,8 +62,8 @@ int	ft_putnbr(int n)
 
 int	ft_printptr(unsigned long address)
 {
-	unsigned long long tmp;
-	int len;
+	unsigned long long	tmp;
+	int					len;
 
 	len = 0;
 	if (!address)
@@ -73,12 +71,12 @@ int	ft_printptr(unsigned long address)
 	tmp = (unsigned long long)address;
 	len += write(1, "0x", 2);
 	len += ft_printhex(tmp, 0);
-	return len;
+	return (len);
 }
 
-int ft_print_unsinged(unsigned long n)
+int	ft_print_unsinged(unsigned long n)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (n > 9)

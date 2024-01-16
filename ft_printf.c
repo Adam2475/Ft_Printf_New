@@ -6,20 +6,20 @@
 /*   By: adapassa <adapassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:25 by adapassa          #+#    #+#             */
-/*   Updated: 2024/01/16 10:33:29 by adapassa         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:41:24 by adapassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	return (write(1, &c, 1));
 }
 
-int ft_putstr(char *str)
+int	ft_putstr(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str == NULL)
@@ -34,7 +34,7 @@ int	format_selector(char c, va_list args)
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
 	else if (c == 's')
-		return (ft_putstr(va_arg(args, char*)));
+		return (ft_putstr(va_arg(args, char *)));
 	else if (c == 'x')
 		return (ft_printhex((long)va_arg(args, unsigned int), 0));
 	else if (c == 'X')
@@ -53,9 +53,9 @@ int	format_selector(char c, va_list args)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list args;
-	int len;
-	int i;
+	va_list		args;
+	int			len;
+	int			i;
 
 	va_start(args, format);
 	i = 0;
