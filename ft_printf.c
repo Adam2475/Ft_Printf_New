@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adapassa <adapassa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/16 10:21:25 by adapassa          #+#    #+#             */
+/*   Updated: 2024/01/16 10:33:29 by adapassa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-static int ft_putchar(char c)
+int ft_putchar(char c)
 {
 	return (write(1, &c, 1));
 }
 
-static int ft_putstr(char *str)
+int ft_putstr(char *str)
 {
 	int i;
 
@@ -17,86 +29,7 @@ static int ft_putstr(char *str)
 	return (i);
 }
 
-static int ft_printhex(unsigned long nbr, int maiusc)
-{
-	char *container;
-	char *maiuscarr;
-	int	len;
-	int tmp;
-
-	container = "0123456789abcdef";
-	maiuscarr = "0123456789ABCDEF";
-	len = 0;
-	if (nbr == 0)
-		return (write(1, "0", 1));
-	if (nbr > 0)
-	{
-		tmp = nbr % 16;
-		if ((nbr / 16) > 0)
-			len += ft_printhex((nbr /= 16), maiusc);
-		if (maiusc == FALSE)
-			len += ft_putchar(container[tmp]);
-		else if (maiusc == 1)
-			len += ft_putchar(maiuscarr[tmp]);
-	}
-	return (len);
-}
-
-static int	ft_putnbr(int n)
-{
-	int len;
-
-	len = 0;
-	if (n == -2147483648)
-	{
-		len += write(1, "-2147483648", 11);
-	}
-	else if (n < 0)
-	{
-		len += write(1, "-", 1);
-		n = -n;
-		len += ft_putnbr(n);
-	}
-	else if (n > 9)
-	{
-		len += ft_putnbr(n / 10);
-		len += ft_putnbr(n % 10);
-	}
-	else
-		len += ft_putchar(n + 48);
-	return (len);
-}
-
-static int	ft_printptr(unsigned long address)
-{
-	unsigned long long tmp;
-	int len;
-
-	len = 0;
-	if (!address)
-		return (write(1, "(nil)", 5));
-	tmp = (unsigned long long)address;
-	len += write(1, "0x", 2);
-	len += ft_printhex(tmp, 0);
-	return len;
-}
-
-static int ft_print_unsinged(unsigned long n)
-{
-	int len;
-
-	len = 0;
-	if (n > 9)
-	{
-		len += ft_print_unsinged(n / 10);
-		len += ft_print_unsinged(n % 10);
-	}
-	else
-		len += ft_putchar(n + 48);
-	return (len);
-}
-
-static int	format_selector(char c, va_list args)
+int	format_selector(char c, va_list args)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
@@ -198,6 +131,8 @@ int main(void)
 	ft_printf("Mine: %p\n", &c);
 	printf("Real: %p\n", &p);
 	ft_printf("Mine: %p\n", &p);
+	printf("Real: %p\n", str);
+	ft_printf("Mine: %p\n", str);
 	//printf("Real: %p\n", -1);
 	ft_printf("Mine: %p\n", -1);
 	printf("Return len: %d\n", ft_printf("Mine: %p\n", -1));
@@ -207,7 +142,3 @@ int main(void)
 	return (0);
 }
 */
-
-// 1 hex letter represents 4 bits
-
-// cspdiuxX%
